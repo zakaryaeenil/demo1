@@ -1,0 +1,110 @@
+<!-- begin::Table -->
+<ag-grid-angular
+  style="width: 100%; height: 85%"
+  class="ag-theme-alpine"
+  [columnDefs]="columnDefs"
+  [defaultColDef]="defaultColDef"
+  [autoGroupColumnDef]="autoGroupColumnDef"
+  [rowData]="rowData$!"
+  [rowSelection]="'multiple'"
+  [animateRows]="true"
+  [enableRangeSelection]="true"
+  [paginationAutoPageSize]="true"
+  [pagination]="true"
+  [suppressRowClickSelection]="true"
+  [groupSelectsChildren]="true"
+  [rowGroupPanelShow]="rowGroupPanelShow"
+  [pivotPanelShow]="pivotPanelShow"
+  (gridReady)="onGridReady($event)"
+  (selectionChanged)="onSelectionChanged($event)"
+  (cellClicked)="onCellClicked($event)"
+></ag-grid-angular>
+<!-- end::Table -->
+<!-- end::Table -->
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Confirmation</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure to delete this?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="d('Cross click')">Cancel</button>
+    <button type="button" class="btn btn-outline-dark" (click)="c('yes')">Yes</button>
+  </div>
+</ng-template>
+
+<ng-template #sayHelloTemplate let-c="close" let-d="dismiss">
+  <!--begin::Modal content-->
+  <div class="modal-content" >
+    <!--begin::Modal header-->
+    <div class="modal-header pb-0 border-0 justify-content-end">
+      <!--begin::Close-->
+      <div (click)="d('Cross click')" class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+        <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+        <span class="svg-icon svg-icon-1">
+														<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+															<rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+															<rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+														</svg>
+													</span>
+        <!--end::Svg Icon-->
+      </div>
+      <!--end::Close-->
+    </div>
+    <!--begin::Modal header-->
+    <!--begin::Modal body-->
+    <div class="modal-body scroll-y pt-0 pb-15">
+      <!--begin::Wrapper-->
+      <div class="mw-lg-600px mx-auto">
+        <!--begin::Heading-->
+        <div class="mb-13 text-center">
+          <!--begin::Title-->
+          <h1  class="mb-3">{{titleMsg}}</h1>
+          <!--end::Title-->
+          <!--begin::Description-->
+          <div class="text-muted fw-bold fs-5">
+            Type Dossier :
+            <a  class="link-primary fw-bolder">{{typeDossierDetailsView}}</a>.
+          </div>
+          <!--end::Description-->
+        </div>
+        <!--end::Heading-->
+        <!--begin::Input group-->
+        <div class="row mb-10">
+          <!--begin::Col-->
+          <div *ngFor="let detail of details" class="col-md-6">
+            <!--begin::Card-->
+            <div class="card h-100">
+              <!--begin::Card body-->
+              <div class="card-body d-flex justify-content-center text-center flex-column p-8">
+                <!--begin::Name-->
+                <a (click)="OnDownload(detail)" class="text-gray-800 text-hover-primary d-flex flex-column">
+                  <!--begin::Image-->
+                  <div class="symbol symbol-60px mb-5">
+                    <img src="assets/media/svg/files/doc.svg" alt="" />
+                  </div>
+                  <!--end::Image-->
+                  <!--begin::Title-->
+                  <div class="fs-5 fw-bolder mb-2">{{detail.name}}</div>
+                  <!--end::Title-->
+                </a>
+                <!--end::Name-->
+              </div>
+              <!--end::Card body-->
+            </div>
+            <!--end::Card-->
+          </div>
+          <!--end::Col-->
+        </div>
+        <!--end::Input group-->
+      </div>
+      <!--end::Wrapper-->
+    </div>
+    <!--end::Modal body-->
+  </div>
+  <!--end::Modal content-->
+</ng-template>

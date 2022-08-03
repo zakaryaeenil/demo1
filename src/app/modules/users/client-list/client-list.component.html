@@ -1,0 +1,44 @@
+<div *ngIf="show == true"  class="d-flex justify-content-end align-items-center">
+  <div class="fw-bolder me-5">
+    <span class="me-2" data-kt-user-table-select="selected_count">{{countSelected}}</span>Selected</div>
+  <button type="button"  (click)="open(content)" class="btn btn-danger" >Delete Selected</button>
+  <button type="button"  (click)="clearSelection()" class="btn btn-info" >Clear Selection</button>
+</div>
+<br>
+<!-- begin::Table -->
+<ag-grid-angular
+  style="width: 100%; height: 85%"
+  class="ag-theme-alpine"
+  [columnDefs]="columnDefs"
+  [defaultColDef]="defaultColDef"
+  [autoGroupColumnDef]="autoGroupColumnDef"
+  [rowData]="rowData$!"
+  [rowSelection]="'multiple'"
+  [animateRows]="true"
+  [enableRangeSelection]="true"
+  [paginationAutoPageSize]="true"
+  [pagination]="true"
+  [suppressRowClickSelection]="true"
+  [groupSelectsChildren]="true"
+  [rowGroupPanelShow]="rowGroupPanelShow"
+  [pivotPanelShow]="pivotPanelShow"
+  (gridReady)="onGridReady($event)"
+  (selectionChanged)="onSelectionChanged($event)"
+  [frameworkComponents]="frameworkComponents"
+></ag-grid-angular>
+<!-- end::Table -->
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Confirmation</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure to delete this?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="d('Cross click')">Cancel</button>
+    <button type="button" class="btn btn-outline-dark" (click)="c('yes')">Yes</button>
+  </div>
+</ng-template>
